@@ -26,7 +26,7 @@ const App = () => {
     {/* This MUST have a higher z-index than the video and a solid BG color */}
     <main 
       ref={productSectionRef} 
-      className="relative z-30 bg-white border-8 border-red-500"
+      className="relative z-30 bg-white"
     >
       <ProductGrid selectedCategory={selectedCategory} />
     </main>

@@ -2,21 +2,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "./ProductCard";
 
-// const ProductCard = ({ product }) => (
-//   <div className="group relative flex flex-col bg-gray-50 p-4 rounded-xl">
-//     <div className="aspect-square overflow-hidden rounded-lg">
-//       <img src={product.image} alt={product.title} className="w-full h-full object-contain" />
-//     </div>
-//     <h3 className="mt-4 text-sm font-bold text-gray-700 truncate">{product.title}</h3>
-//     <p className="mt-1 text-lg font-medium text-gray-900">${product.price}</p>
-//   </div>
-// );
-
 //Products grid
 const ProductGrid = ({ selectedCategory }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-
+const [detailProduct, setDetailProduct] = useState(null);
     //Fetch data from api
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
@@ -35,66 +25,102 @@ const ProductGrid = ({ selectedCategory }) => {
     const filteredProducts = selectedCategory === "all"
         ? products
         : products.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
-    return (
+return (
+    <section className="bg-white py-12 px-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Your Header and Grid logic here */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+           {filteredProducts.map((product) => (
+             <ProductCard 
+               key={product.id} 
+               product={product} 
+               // Pass a function to open the details
+               onViewDetails={() => setDetailProduct(product)} 
+             />
+           ))}
 
-        <section className="bg-white py-12 px-6">
-            <div className="max-w-7xl mx-auto">
-                {/* Dynamic Header */}
-                <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter">
-                    {isFiltered ? `Exploring ${selectedCategory}` : "Featured Collection"}
-                </h2>
+        </div>
+      </div>
 
-                {/* The Grid: Changes from 4 columns to 2 columns when filtered */}
-        <div className={`grid gap-10 transition-all duration-700 ease-in-out ${
-          isFiltered 
-            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-32" // Slightly larger, more focus
-            : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" // Standard compact view
-        }`}>
-                    <AnimatePresence mode="popLayout">
-                        {filteredProducts.map((product) => (
-                            <ProductCard
-                                key={product.id}
-                                product={product}
-                                isLarge={isFiltered}
-                            />
-                        ))}
-                    </AnimatePresence>
-                </div>
-                <hr></hr>
-                <br></br>
-                <h2 className="text-3xl font-black mb-12 uppercase tracking-tighter">Featured Collection</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {products.map((product) => (
-                        <motion.div
-                            key={product.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="group cursor-pointer"
-                        >
-                            <div className="relative aspect-square overflow-hidden rounded-2xl bg-gray-50 border border-gray-100 p-8">
-                                <motion.img
-                                    whileHover={{ scale: 1.1 }}
-                                    transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                                    src={product.image}
-                                    alt={product.title}
-                                    className="h-full w-full object-contain"
-                                />
-                                <button className="absolute bottom-4 left-4 right-4 bg-black text-white py-3 rounded-xl font-bold opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                                    Quick Add
-                                </button>
-                            </div>
-                            <div className="mt-4">
-                                <p className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">{product.category}</p>
-                                <h3 className="text-sm font-bold text-gray-900 truncate mt-1">{product.title}</h3>
-                                <p className="text-lg font-light text-gray-600 mt-1">${product.price}</p>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+      {/* --- PRODUCT DETAIL MODAL --- */}
+<AnimatePresence>
+  {detailProduct && (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+      {/* Dark Backdrop */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={() => setDetailProduct(null)}
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+      />
+
+      {/* Modal Content */}
+      <motion.div 
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        /* Added max-h-[90vh] and overflow-y-auto for scrolling */
+        className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl flex flex-col md:flex-row"
+      >
+        {/* Close Button - Added 'sticky' or kept 'absolute' but ensure it stays visible */}
+        <button 
+          onClick={() => setDetailProduct(null)}
+          className="absolute top-4 right-4 z-20 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors shadow-sm"
+        >
+          ✕
+        </button>
+
+        {/* Product Image Section */}
+        {/* Reduced p-12 to p-6 for mobile */}
+        <div className="w-full md:w-1/2 bg-[#f9f9f9] p-6 md:p-12 flex items-center justify-center">
+          <img 
+            src={detailProduct.image} 
+            alt={detailProduct.title} 
+            /* Added h-auto and responsive max-height */
+            className="h-auto max-h-[250px] md:max-h-[400px] object-contain mix-blend-multiply" 
+          />
+        </div>
+
+        {/* Product Info Section */}
+        {/* Reduced p-10 to p-6 for mobile */}
+        <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col">
+          <p className="text-blue-600 font-bold uppercase tracking-widest text-[10px] md:text-xs mb-2">
+            {detailProduct.category}
+          </p>
+          <h2 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-4">
+            {detailProduct.title}
+          </h2>
+          
+          <div className="flex items-center gap-2 mb-4">
+             <span className="bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded">
+               ★ {detailProduct.rating?.rate}
+             </span>
+             <span className="text-gray-400 text-sm">
+               ({detailProduct.rating?.count} reviews)
+             </span>
+          </div>
+
+          <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
+            {detailProduct.description}
+          </p>
+
+          <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+            <span className="text-2xl md:text-4xl font-light text-gray-900">
+              ${detailProduct.price}
+            </span>
+            <button className="bg-black text-white px-6 py-3 md:px-8 md:py-4 rounded-2xl font-bold hover:bg-blue-600 transition-colors">
+              Add to Bag
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  )}
+</AnimatePresence>
+    </section>
+  );
+
 };
 
 export default ProductGrid;
