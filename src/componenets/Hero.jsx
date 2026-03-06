@@ -14,7 +14,7 @@ const Hero = () => {
                 playsInline
                 className="fixed top-0 left-0 w-screen h-screen object-cover -z-10"
             >
-             <source src={bgImage} type="video/mp4" />
+             <source src={bgImage} type="video/webm" />
             </motion.video>
 
             {/* 2. Dark Gradient Overlay */}
