@@ -26,7 +26,7 @@ const ProductGrid = ({ selectedCategory }) => {
                 setLoading(false);
             });
     }, []);
-
+    const isFiltered = selectedCategory !== "all";
     if (loading) return (
         <div className="h-64 flex items-center justify-center">
             <div className="w-8 h-8 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
@@ -39,13 +39,28 @@ const ProductGrid = ({ selectedCategory }) => {
 
         <section className="bg-white py-12 px-6">
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <AnimatePresence>
+                {/* Dynamic Header */}
+                <h2 className="text-4xl font-black mb-12 uppercase tracking-tighter">
+                    {isFiltered ? `Exploring ${selectedCategory}` : "Featured Collection"}
+                </h2>
+
+                {/* The Grid: Changes from 4 columns to 2 columns when filtered */}
+        <div className={`grid gap-10 transition-all duration-700 ease-in-out ${
+          isFiltered 
+            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-32" // Slightly larger, more focus
+            : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" // Standard compact view
+        }`}>
+                    <AnimatePresence mode="popLayout">
                         {filteredProducts.map((product) => (
-                            <ProductCard key={product.id} product={product} />
+                            <ProductCard
+                                key={product.id}
+                                product={product}
+                                isLarge={isFiltered}
+                            />
                         ))}
                     </AnimatePresence>
                 </div>
+                <hr></hr>
                 <br></br>
                 <h2 className="text-3xl font-black mb-12 uppercase tracking-tighter">Featured Collection</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
