@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import bgImage from "../media/1409-147170113.mp4"
+import bgImage from "../media/1409-147170113.webm"
 const Hero = () => {
     return (
         <div className="relative h-screen w-full overflow-hidden">
