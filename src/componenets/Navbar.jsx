@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import CartSidebar from "./CartSidebar";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // Mobile menu state
+const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);     // Mobile menu state
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -12,6 +14,7 @@ const Navbar = () => {
   }, []);
 
   return (
+    <>
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4 ${
       isScrolled ? "bg-black/90 backdrop-blur-md py-3 shadow-lg" : "bg-transparent"
     }`}>
@@ -28,25 +31,36 @@ const Navbar = () => {
           <a href="#" className="hover:text-blue-400 transition-colors">About</a>
         </div>
 
-        {/* Action Icons & Hamburger */}
-        <div className="flex items-center space-x-5 text-white">
-          <button className="hover:text-blue-400 transition-colors hidden sm:block">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-          </button>
-          
-{/* Hamburger Button */}
-<button 
-  onClick={() => setIsOpen(!isOpen)}
-  className="flex flex-col justify-center items-center w-8 h-8 space-y-1.5 z-[60] md:hidden" 
->
-  {/* Top Line */}
-  <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? "rotate-45 translate-y-2" : ""}`}></div>
-  {/* Middle Line */}
-  <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? "opacity-0" : ""}`}></div>
-  {/* Bottom Line */}
-  <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}></div>
-</button>
-        </div>
+{/* Action Icons & Hamburger */}
+<div className="flex items-center space-x-6 text-white">
+  {/* Search Icon */}
+  <button className="hover:text-blue-400 transition-colors hidden sm:block">
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  </button>
+
+  {/* Cart Icon (The "Cartwheel") */}
+  <button onClick={() => setIsCartOpen(true)} className="relative group hover:text-blue-400 transition-colors">
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+    </svg>
+    {/* Cart Notification Badge */}
+    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-500 text-[10px] font-bold text-white ring-2 ring-black group-hover:bg-blue-400 transition-colors">
+      0
+    </span>
+  </button>
+  
+  {/* Hamburger Button */}
+  <button 
+    onClick={() => setIsOpen(!isOpen)}
+    className="flex flex-col justify-center items-center w-8 h-8 space-y-1.5 z-[60] md:hidden" 
+  >
+    <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? "rotate-45 translate-y-2" : ""}`}></div>
+    <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? "opacity-0" : ""}`}></div>
+    <div className={`w-6 h-0.5 bg-white transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-2" : ""}`}></div>
+  </button>
+</div>
       </div>
 
       {/* Mobile Slide-out Menu */}
@@ -66,6 +80,8 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </nav>
+    <CartSidebar isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+    </>
   );
 };
 

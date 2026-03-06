@@ -32,7 +32,7 @@ const Hero = () => {
                 >
                     Be <span className="text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.5)]"><i>ANY</i></span>thing you want
                     <br />
-                    <span className="text-3xl md:text-5xl font-light opacity-90">Start Exploring</span>
+                    <span className="text-3xl md:text-5xl font-light opacity-90">Explore the collection</span>
                 </motion.h1>
 
 
@@ -44,9 +44,24 @@ const Hero = () => {
                     whileTap={{ scale: 0.95 }}
                     className="group px-10 py-4 font-bold text-white bg-black/60 backdrop-blur-xl border border-white/20 rounded-full shadow-2xl transition-colors hover:bg-blue-400"
                 >
-                    Start Shopping
+                    Shop Now
                 </motion.button>
-
+                <motion.div 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 1.5, duration: 1 }}
+    className="mt-12 flex flex-wrap justify-center gap-3 max-w-xl"
+>
+    {/* Mapping through your API categories here */}
+    {['electronics', 'jewelry', "men's clothing", "women's clothing"].map((cat) => (
+        <button 
+            key={cat}
+            className="px-4 py-1.5 rounded-full border border-white/30 bg-white/5 backdrop-blur-md text-xs font-medium text-white/80 hover:bg-blue-400 hover:text-white transition-all capitalize"
+        >
+            {cat}
+        </button>
+    ))}
+</motion.div>
             </div>
         </div>
     );
