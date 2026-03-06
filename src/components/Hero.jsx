@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm"
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
+    const categories = ['all', 'electronics', 'jewelery', "men's clothing", "women's clothing"];
     return (
+       
         <div className="relative h-screen w-full overflow-hidden z-10">
             {/* 1. Background Video with Fade-in */}
             <motion.video
@@ -54,7 +56,7 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     className="mt-12 flex flex-wrap justify-center gap-3 max-w-xl"
 >
     {/* Mapping through your API categories here */}
-    {['electronics', 'jewelry', "men's clothing", "women's clothing"].map((cat) => (
+    {categories.map((cat) => (
         <button 
             key={cat}
             onClick={() => {
