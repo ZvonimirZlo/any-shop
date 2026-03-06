@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm"
-const Hero = () => {
+const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     return (
-        <div className="relative h-screen w-full overflow-hidden">
+        <div className="relative h-screen w-full overflow-hidden z-10">
             {/* 1. Background Video with Fade-in */}
             <motion.video
                 initial={{ opacity: 0 }}
@@ -37,6 +37,7 @@ const Hero = () => {
 
 
                 <motion.button
+                onClick={scrollToProducts}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
@@ -56,6 +57,10 @@ const Hero = () => {
     {['electronics', 'jewelry', "men's clothing", "women's clothing"].map((cat) => (
         <button 
             key={cat}
+            onClick={() => {
+        setSelectedCategory(cat);
+        scrollToProducts();
+      }}
             className="px-4 py-1.5 rounded-full border border-white/30 bg-white/5 backdrop-blur-md text-xs font-medium text-white/80 hover:bg-blue-400 hover:text-white transition-all capitalize"
         >
             {cat}
