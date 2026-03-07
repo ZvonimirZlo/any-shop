@@ -71,21 +71,46 @@ const Navbar = ({ setSelectedCategory }) => {
         </div>
 
         {/* Mobile Slide-out Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-screen w-[75%] bg-black/95 backdrop-blur-xl z-[55] flex flex-col p-10 pt-24 space-y-8 shadow-2xl"
-            >
-              <a href="#" onClick={() => setIsOpen(false)} className="text-white text-3xl font-bold italic border-b border-white/10 pb-4">Shop</a>
-              <a href="#" onClick={() => setIsOpen(false)} className="text-white text-3xl font-bold italic border-b border-white/10 pb-4">New Arrivals</a>
-              <a href="#" onClick={() => setIsOpen(false)} className="text-white text-3xl font-bold italic border-b border-white/10 pb-4">About</a>
-            </motion.div>
-          )}
-        </AnimatePresence>
+<AnimatePresence>
+  {isOpen && (
+    <motion.div
+      initial={{ x: "100%" }}
+      animate={{ x: 0 }}
+      exit={{ x: "100%" }}
+      className="fixed top-0 right-0 h-screen w-[75%] bg-black/95 backdrop-blur-xl z-[55] flex flex-col p-10 pt-24 space-y-8"
+    >
+      {/* Home / Shop Link */}
+      <Link 
+        to="/" 
+        onClick={() => {
+          setSelectedCategory("all");
+          setIsOpen(false);
+        }} 
+        className="text-white text-3xl font-bold italic border-b border-white/10 pb-4"
+      >
+        Shop
+      </Link>
+
+      {/* New Arrivals Link */}
+      <Link 
+        to="/arrivals" 
+        onClick={() => setIsOpen(false)} 
+        className="text-white text-3xl font-bold italic border-b border-white/10 pb-4"
+      >
+        New Arrivals
+      </Link>
+
+      {/* About Link */}
+      <Link 
+        to="/about" 
+        onClick={() => setIsOpen(false)} 
+        className="text-white text-3xl font-bold italic border-b border-white/10 pb-4"
+      >
+        About
+      </Link>
+    </motion.div>
+  )}
+</AnimatePresence>
       </nav>
       <CartSidebar isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
     </>
