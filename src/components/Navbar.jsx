@@ -27,7 +27,7 @@ const [isScrolled, setIsScrolled] = useState(false);
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest text-white/90">
           <a href="#" className="hover:text-blue-400 transition-colors">Shop</a>
-          <a href="#" className="hover:text-blue-400 transition-colors">New</a>
+          <a href="#" className="hover:text-blue-400 transition-colors">New Arivals</a>
           <a href="#" className="hover:text-blue-400 transition-colors">About</a>
         </div>
 

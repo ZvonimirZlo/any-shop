@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm"
 
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
+    //array of products
     const categories = ['all', 'electronics', 'jewelery', "men's clothing", "women's clothing"];
     return (
-       
+
         <div className="relative h-screen w-full overflow-hidden z-10">
             {/* 1. Background Video with Fade-in */}
             <motion.video
@@ -17,13 +18,13 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
                 playsInline
                 className="fixed top-0 left-0 w-screen h-screen object-cover -z-10"
             >
-             <source src={bgImage} type="video/webm" />
+                <source src={bgImage} type="video/webm" />
             </motion.video>
 
-            {/* 2. Dark Gradient Overlay */}
+            {/* 2. Dark gradient overlay */}
             <div className="fixed top-0 left-0 w-screen h-screen bg-gradient-to-b from-black/40 via-black/50 to-black/80 -z-10"></div>
 
-            {/* 3. Content Container */}
+            {/* 3. Content container */}
             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4">
 
 
@@ -38,9 +39,9 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
                     <span className="text-3xl md:text-5xl font-light opacity-90">Explore the collection</span>
                 </motion.h1>
 
-
+                {/* Shop Now button */}
                 <motion.button
-                onClick={scrollToProducts}
+                    onClick={scrollToProducts}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
@@ -50,26 +51,26 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
                 >
                     Shop Now
                 </motion.button>
-                <motion.div 
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 1.5, duration: 1 }}
-    className="mt-12 flex flex-wrap justify-center gap-3 max-w-xl"
->
-    {/* Mapping through API categories */}
-    {categories.map((cat) => (
-        <button 
-            key={cat}
-            onClick={() => {
-        setSelectedCategory(cat);
-        scrollToProducts();
-      }}
-            className="px-4 py-1.5 rounded-full border border-white/30 bg-white/5 backdrop-blur-md text-xs font-medium text-white/80 hover:bg-blue-400 hover:text-white transition-all capitalize"
-        >
-            {cat}
-        </button>
-    ))}
-</motion.div>
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.5, duration: 1 }}
+                    className="mt-12 flex flex-wrap justify-center gap-3 max-w-xl"
+                >
+                    {/* Mapping through API categories */}
+                    {categories.map(cat => (
+                        <button
+                            key={cat}
+                            onClick={() => {
+                                setSelectedCategory(cat);
+                                scrollToProducts();
+                            }}
+                            className="px-4 py-1.5 rounded-full border border-white/30 bg-white/5 backdrop-blur-md text-xs font-medium text-white/80 hover:bg-blue-400 hover:text-white transition-all capitalize"
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </motion.div>
             </div>
         </div>
     );
