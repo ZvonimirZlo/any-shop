@@ -30,11 +30,11 @@ const Navbar = ({ setSelectedCategory }) => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-8">
-            <Link to="/arrivals" className="hover:text-blue-400">
-              New Arrivals
+            <Link to="/arrivals" className= "text-white hover:text-blue-400" >
+              NEW ARIVALS
             </Link>
-            <Link to="/about" className="hover:text-blue-400">
-              About
+            <Link to="/about" className="text-white hover:text-blue-400" >
+              ABOUT
             </Link>
           </div>
 

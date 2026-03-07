@@ -81,7 +81,7 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
                                 setSelectedCategory(cat);
                                 scrollToProducts();
                             }}
-                            className="px-4 py-1.5 rounded-full border border-white/30 bg-white/5 backdrop-blur-md text-xs font-medium text-white/80 hover:bg-blue-400 hover:text-white transition-all capitalize"
+                            className="px-4 py-1.5 rounded-full  bg-white/5 backdrop-blur-md text-xs font-medium text-white/80 hover:bg-blue-400 hover:text-white transition-all capitalize"
                         >
                             {cat}
                         </button>
