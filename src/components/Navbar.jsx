@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import CartSidebar from "./CartSidebar";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext"; 
+import CartSidebar from "./CartSidebar";
 
-const Navbar = ({ setSelectedCategory }) => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);     // Mobile menu state
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
+   const { cartCount, setIsCartOpen, isCartOpen } = useCart();
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   return (
     <>
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4 ${isScrolled ? "bg-black/90 backdrop-blur-md py-3 shadow-lg" : "bg-transparent"
@@ -112,7 +111,7 @@ const Navbar = ({ setSelectedCategory }) => {
   )}
 </AnimatePresence>
       </nav>
-      <CartSidebar isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
+      <CartSidebar />
     </>
   );
 };

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useCart } from "../context/CartContext";
 
 const ProductCard = ({ product, onViewDetails }) => {
   return (
@@ -21,9 +22,6 @@ const ProductCard = ({ product, onViewDetails }) => {
             className="w-full bg-white/90 backdrop-blur-md text-black py-2.5 rounded-xl text-sm font-bold border border-gray-200 hover:bg-white shadow-sm transition-colors"
           >
             Quick View
-          </button>
-          <button className="w-full bg-black text-white py-2.5 rounded-xl text-sm font-bold hover:bg-blue-600 shadow-lg transition-colors">
-            Add to Bag
           </button>
         </div>
       </div>

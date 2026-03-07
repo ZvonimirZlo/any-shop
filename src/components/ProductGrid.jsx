@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "./ProductCard";
+import { useCart } from "../context/CartContext";
 
 const ProductGrid = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [detailProduct, setDetailProduct] = useState(null);
-  
+  const { addToCart } = useCart();
   // 1. Add state for the selected category
   const [selectedCategory, setSelectedCategory] = useState("all");
 
@@ -137,9 +138,15 @@ const ProductGrid = () => {
                   <span className="text-2xl md:text-4xl font-light text-gray-900">
                     ${detailProduct.price}
                   </span>
-                  <button className="bg-black text-white px-6 py-3 md:px-8 md:py-4 rounded-2xl font-bold hover:bg-blue-600 transition-colors">
-                    Add to Bag
-                  </button>
+<button 
+  onClick={() => {
+    console.log("Adding product:", detailProduct); // Add this log to test!
+    addToCart(detailProduct);
+  }}
+  className="bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-600 transition-colors"
+>
+  Add to Bag
+</button>
                 </div>
               </div>
             </motion.div>
