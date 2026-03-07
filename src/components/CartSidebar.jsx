@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useCart } from "../context/CartContext";
 const CartSidebar = () => {
 
-  const { cartItems, removeFromCart, isCartOpen, setIsCartOpen, cartTotal } = useCart();
+  const { cartItems, clearCart, removeFromCart, isCartOpen, setIsCartOpen, cartTotal } = useCart();
   // Lock scroll when cart is open
   useEffect(() => {
     isCartOpen ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'unset';
@@ -80,8 +80,27 @@ const CartSidebar = () => {
                 <span className="text-gray-500 font-medium">Subtotal</span>
                 <span className="text-xl font-bold text-black">${cartTotal.toFixed(2)}</span>
               </div>
-              <button className="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-blue-600 transition-all shadow-lg shadow-black/10">
-                Checkout Now
+              {/* Mimics the buying progress on click */}
+              <button
+                onClick={() => {
+                  if (cartItems.length > 0) {
+                    const confirmed = window.confirm("Are you sure you want to complete your purchase?");
+
+                    if (confirmed) {
+                      clearCart(); // Wipes the bag
+                      setIsCartOpen(false); // Closes the sidebar
+                      alert("Success! Thank you for your purchase. 🎉");
+                    }
+                  }
+                }}
+                disabled={cartItems.length === 0}
+                className={`w-full py-4 font-bold rounded-xl transition-all shadow-lg 
+    ${cartItems.length === 0
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-black text-white hover:bg-blue-600 shadow-black/10"
+                  }`}
+              >
+                {cartItems.length === 0 ? "Your Bag is Empty" : "Checkout Now"}
               </button>
             </div>
             <div className="p-6 border-t border-gray-100 bg-gray-50">
