@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm"
+
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const categories = ['all', 'electronics', 'jewelery', "men's clothing", "women's clothing"];
     return (
@@ -55,7 +56,7 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     transition={{ delay: 1.5, duration: 1 }}
     className="mt-12 flex flex-wrap justify-center gap-3 max-w-xl"
 >
-    {/* Mapping through your API categories here */}
+    {/* Mapping through API categories */}
     {categories.map((cat) => (
         <button 
             key={cat}

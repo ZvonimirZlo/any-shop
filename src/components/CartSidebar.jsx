@@ -4,12 +4,8 @@ import { useEffect } from "react";
 const CartSidebar = ({ isCartOpen, setIsCartOpen }) => {
   // Lock scroll when cart is open
   useEffect(() => {
-    if (isCartOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isCartOpen]);
+    isCartOpen ? document.body.style.overflow = 'hidden': document.body.style.overflow = 'unset';
+    }, [isCartOpen]);
 
   return (
     <AnimatePresence>

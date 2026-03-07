@@ -28,7 +28,7 @@ const [detailProduct, setDetailProduct] = useState(null);
 return (
     <section className="bg-white py-12 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Your Header and Grid logic here */}
+        {/* Header and Grid logic here */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
            {filteredProducts.map((product) => (
              <ProductCard 
@@ -72,18 +72,15 @@ return (
         </button>
 
         {/* Product Image Section */}
-        {/* Reduced p-12 to p-6 for mobile */}
         <div className="w-full md:w-1/2 bg-[#f9f9f9] p-6 md:p-12 flex items-center justify-center">
           <img 
             src={detailProduct.image} 
             alt={detailProduct.title} 
-            /* Added h-auto and responsive max-height */
             className="h-auto max-h-[250px] md:max-h-[400px] object-contain mix-blend-multiply" 
           />
         </div>
 
         {/* Product Info Section */}
-        {/* Reduced p-10 to p-6 for mobile */}
         <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col">
           <p className="text-blue-600 font-bold uppercase tracking-widest text-[10px] md:text-xs mb-2">
             {detailProduct.category}

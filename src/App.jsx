@@ -13,24 +13,22 @@ const App = () => {
 
   return (
     <div className="relative w-full">
-    <Navbar />
-    
-    {/* 1. HERO SECTION (The Background Layer) */}
-    {/* We use a 'height' div here to hold the space so the products don't jump to the top */}
-    <section className="relative h-screen w-full">
-      <Hero setSelectedCategory={setSelectedCategory} 
-       scrollToProducts={scrollToProducts} />
-    </section>
+      <Navbar />
 
-    {/* 2. PRODUCT SECTION (The Foreground Layer) */}
-    {/* This MUST have a higher z-index than the video and a solid BG color */}
-    <main 
-      ref={productSectionRef} 
-      className="relative z-30 bg-white"
-    >
-      <ProductGrid selectedCategory={selectedCategory} />
-    </main>
-  </div>
+      {/* 1. HERO SECTION (The Background Layer) */}
+      <section className="relative h-screen w-full">
+        <Hero setSelectedCategory={setSelectedCategory}
+          scrollToProducts={scrollToProducts} />
+      </section>
+
+      {/* 2. PRODUCT SECTION (The Foreground Layer) */}
+      <main
+        ref={productSectionRef}
+        className="relative z-30 bg-white"
+      >
+        <ProductGrid selectedCategory={selectedCategory} />
+      </main>
+    </div>
   );
 };
 
