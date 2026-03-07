@@ -34,7 +34,7 @@ const ProductGrid = () => {
   );
 
   return (
-    <section className="bg-white py-12 px-6">
+    <section className="relative z-20 bg-white py-12 px-6">
       <div className="max-w-7xl mx-auto">
         
         {/* --- FILTER BUTTONS --- */}

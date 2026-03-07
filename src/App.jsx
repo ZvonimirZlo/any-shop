@@ -1,35 +1,34 @@
-import { useState, useRef } from "react";
-import Hero from "./components/Hero";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
 import ProductGrid from "./components/ProductGrid";
+import About from './components/About'
+import NewArrivals from './components/NewArivals'
 
-const App = () => {
+function App() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const productSectionRef = useRef(null);
-
-  const scrollToProducts = () => {
-    productSectionRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
-    <div className="relative w-full">
-      <Navbar />
-
-      {/* 1. HERO SECTION (The Background Layer) */}
-      <section className="relative h-screen w-full">
-        <Hero setSelectedCategory={setSelectedCategory}
-          scrollToProducts={scrollToProducts} />
-      </section>
-
-      {/* 2. PRODUCT SECTION (The Foreground Layer) */}
-      <main
-        ref={productSectionRef}
-        className="relative z-30 bg-white"
-      >
-        <ProductGrid selectedCategory={selectedCategory} />
-      </main>
-    </div>
+    <Router>
+      <Navbar setSelectedCategory={setSelectedCategory} />
+      
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <>
+              <Hero setSelectedCategory={setSelectedCategory} />
+              <ProductGrid selectedCategory={selectedCategory} />
+            </>
+          } 
+        />
+        
+        <Route path="/arrivals" element={<NewArrivals />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;

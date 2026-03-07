@@ -1,9 +1,25 @@
 import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm"
+import { useNavigate } from "react-router-dom";
 
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
+    const navigate = useNavigate();
     //array of products
     const categories = ['all', 'electronics', 'jewelery', "men's clothing", "women's clothing"];
+    const handleShopAction = (category = "all") => {
+        setSelectedCategory(category);
+        navigate("/"); // Ensure we are on the home route
+        
+        // Timeout allows the route to change before scrolling
+        setTimeout(() => {
+            window.scrollTo({
+                top: window.innerHeight, // Scrolls down one full screen height
+                behavior: "smooth"
+            });
+        }, 100);
+    };
+    
+    
     return (
 
         <div className="relative h-screen w-full overflow-hidden z-10">
@@ -41,7 +57,7 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
 
                 {/* Shop Now button */}
                 <motion.button
-                    onClick={scrollToProducts}
+                    onClick = { () => handleShopAction("all")}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
