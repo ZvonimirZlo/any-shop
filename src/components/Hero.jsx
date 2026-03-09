@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm"
 import { useNavigate } from "react-router-dom";
-
+    const categories = ['electronics', 'jewelery', "men's clothing", "women's clothing"];
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const navigate = useNavigate();
     //array of products
-    const categories = ['electronics', 'jewelery', "men's clothing", "women's clothing"];
+
     const handleShopAction = (category = "all") => {
         setSelectedCategory(category);
         navigate("/"); // Ensure we are on the home route
