@@ -29,22 +29,16 @@ const Navbar = () => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-8">
-            <Link to="/arrivals" className= "text-white hover:text-blue-400" >
+            <Link to="/arrivals" style={{letterSpacing:'5px'}} className= "text-white hover:text-blue-400" >
               NEW ARIVALS
             </Link>
-            <Link to="/about" className="text-white hover:text-blue-400" >
+            <Link to="/about" style={{letterSpacing:'5px'}} className="text-white hover:text-blue-400" >
               ABOUT
             </Link>
           </div>
 
           {/* Action Icons & Hamburger */}
           <div className="flex items-center space-x-6 text-white">
-            {/* Search Icon */}
-            <button className="hover:text-blue-400 transition-colors hidden sm:block">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
 
             {/* Cart Icon (The "Cartwheel") */}
             <button onClick={() => setIsCartOpen(true)} className="relative group hover:text-blue-400 transition-colors">

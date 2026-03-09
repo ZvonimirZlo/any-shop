@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const navigate = useNavigate();
     //array of products
-    const categories = ['all', 'electronics', 'jewelery', "men's clothing", "women's clothing"];
+    const categories = ['electronics', 'jewelery', "men's clothing", "women's clothing"];
     const handleShopAction = (category = "all") => {
         setSelectedCategory(category);
         navigate("/"); // Ensure we are on the home route
@@ -76,12 +76,13 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
                     {/* Mapping through API categories */}
                     {categories.map(cat => (
                         <button
+                        style={{letterSpacing:'1px'}}
                             key={cat}
                             onClick={() => {
                                 setSelectedCategory(cat);
                                 scrollToProducts();
                             }}
-                            className="px-4 py-1.5 rounded-full  bg-white/5 backdrop-blur-md text-xs font-medium text-white/80 hover:bg-blue-400 hover:text-white transition-all capitalize"
+                            className="px-4 py-1.5 bg-white/5 -md text-xs font-medium text-white/80 hover:text-white transition-all capitalize rounded-tl-lg rounded-br-lg border-1"
                         >
                             {cat}
                         </button>
