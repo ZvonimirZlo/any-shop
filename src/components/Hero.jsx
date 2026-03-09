@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm"
 import { useNavigate } from "react-router-dom";
-    const categories = ['electronics', 'jewelery', "men's clothing", "women's clothing"];
+const categories = ['electronics', 'jewelery', "men's clothing", "women's clothing"];
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const navigate = useNavigate();
     //array of products
@@ -9,7 +9,7 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const handleShopAction = (category = "all") => {
         setSelectedCategory(category);
         navigate("/"); // Ensure we are on the home route
-        
+
         // Timeout allows the route to change before scrolling
         setTimeout(() => {
             window.scrollTo({
@@ -18,8 +18,8 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
             });
         }, 100);
     };
-    
-    
+
+
     return (
 
         <div className="relative h-screen w-full overflow-hidden z-10">
@@ -57,7 +57,7 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
 
                 {/* Shop Now button */}
                 <motion.button
-                    onClick = { () => handleShopAction("all")}
+                    onClick={() => handleShopAction("all")}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
@@ -76,7 +76,7 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
                     {/* Mapping through API categories */}
                     {categories.map(cat => (
                         <button
-                        style={{letterSpacing:'1px'}}
+                            style={{ letterSpacing: '1px' }}
                             key={cat}
                             onClick={() => {
                                 setSelectedCategory(cat);
