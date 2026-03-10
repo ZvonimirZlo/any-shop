@@ -40,7 +40,6 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-// Make sure this is exported!
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {

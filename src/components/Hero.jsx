@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm"
 import { useNavigate } from "react-router-dom";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
+
 const categories = ['electronics', 'jewelery', "men's clothing", "women's clothing"];
+
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const navigate = useNavigate();
-    //array of products
 
     const handleShopAction = (category = "all") => {
         setSelectedCategory(category);
@@ -24,18 +26,22 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
 
         <div className="relative h-screen w-full overflow-hidden z-10">
             {/* 1. Background Video with Fade-in */}
-            <motion.video
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.5 }}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="fixed top-0 left-0 w-screen h-screen object-cover -z-10"
-            >
-                <source src={bgImage} type="video/webm" />
-            </motion.video>
+            <LazyLoadComponent treshold={300}>
+                <motion.video
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1.5 }}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    poster='src/media/girl1-Photoroom.png'
+                    className="fixed top-0 left-0 w-screen h-screen object-cover -z-10"
+                >
+                    <source src={bgImage} type="video/webm" />
+                    <source src='src/media/1409-147170113.mp4' type="video/mp4" />
+                </motion.video>
+            </LazyLoadComponent>
 
             {/* 2. Dark gradient overlay */}
             <div className="fixed top-0 left-0 w-screen h-screen bg-gradient-to-b from-black/40 via-black/50 to-black/80 -z-10"></div>
