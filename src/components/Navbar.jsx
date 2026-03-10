@@ -15,7 +15,7 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4 ${isScrolled ? "bg-black/90 backdrop-blur-md py-3 shadow-lg" : "bg-transparent"
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 px-6 py-4 ${isScrolled ? "bg-black/90 backdrop-blur-md py-3 shadow-lg" : "bg-transparent hover:bg-black"
         }`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
