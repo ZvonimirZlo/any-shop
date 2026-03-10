@@ -1,5 +1,7 @@
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import bgImage from "../media/1409-147170113.webm"
+import bgImage from "../media/1409-147170113.webm";
+import mobilePoster from "../media/girl1-Photoroom.png"; // Your mobile image
 import { useNavigate } from "react-router-dom";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
@@ -7,61 +9,72 @@ const categories = ['electronics', 'jewelery', "men's clothing", "women's clothi
 
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const navigate = useNavigate();
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    // Check screen size to prevent video loading on mobile
+    useEffect(() => {
+        const checkScreen = () => setIsDesktop(window.innerWidth >= 768);
+        checkScreen(); // Initial check
+        window.addEventListener('resize', checkScreen);
+        //clanup function
+        return () => window.removeEventListener('resize', checkScreen);
+    }, []);
 
     const handleShopAction = (category = "all") => {
         setSelectedCategory(category);
-        navigate("/"); // Ensure we are on the home route
-
-        // Timeout allows the route to change before scrolling
+        navigate("/");
         setTimeout(() => {
             window.scrollTo({
-                top: window.innerHeight, // Scrolls down one full screen height
+                top: window.innerHeight,
                 behavior: "smooth"
             });
         }, 100);
     };
 
-
     return (
-
         <div className="relative h-screen w-full overflow-hidden z-10">
-            {/* 1. Background Video with Fade-in */}
-            <LazyLoadComponent treshold={300}>
-                <motion.video
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5 }}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    poster='src/media/girl1-Photoroom.png'
-                    className="fixed top-0 left-0 w-screen h-screen object-cover -z-10"
-                >
-                    <source src={bgImage} type="video/webm" />
-                    <source src='src/media/1409-147170113.mp4' type="video/mp4" />
-                </motion.video>
-            </LazyLoadComponent>
+            {/* 1. Conditional Background Logic */}
+            {isDesktop ? (
+                <LazyLoadComponent threshold={300}>
+                    <motion.video
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1.5 }}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        poster={mobilePoster}
+                        className="fixed top-0 left-0 w-screen h-screen object-cover -z-10"
+                    >
+                        <source src={bgImage} type="video/webm" />
+                        <source src='src/media/1409-147170113.mp4' type="video/mp4" />
+                    </motion.video>
+                </LazyLoadComponent>
+            ) : (
+                // Static Background Image for Mobile
+                <div 
+                    className="fixed top-0 left-0 w-screen h-screen bg-cover bg-center -z-10"
+                    style={{ backgroundImage: `url(${mobilePoster})` }}
+                />
+            )}
 
             {/* 2. Dark gradient overlay */}
             <div className="fixed top-0 left-0 w-screen h-screen bg-gradient-to-b from-black/40 via-black/50 to-black/80 -z-10"></div>
 
             {/* 3. Content container */}
             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4">
-
-
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
                     className="text-white text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-2xl mb-8"
                 >
-                    Be <span className="text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.5)]"><i>ANY</i></span>thing you want
+                    Be <span className="text-blue-400"><i>ANY</i></span>thing you want
                     <br />
                     <span className="text-3xl md:text-5xl font-light opacity-90">Explore the collection</span>
                 </motion.h1>
 
-                {/* Shop Now button */}
                 <motion.button
                     onClick={() => handleShopAction("all")}
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -73,22 +86,21 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
                 >
                     Shop Now
                 </motion.button>
+                
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.5, duration: 1 }}
                     className="mt-12 flex flex-wrap justify-center gap-3 max-w-xl"
                 >
-                    {/* Mapping through API categories */}
                     {categories.map(cat => (
                         <button
-                            style={{ letterSpacing: '1px' }}
                             key={cat}
                             onClick={() => {
                                 setSelectedCategory(cat);
                                 scrollToProducts();
                             }}
-                            className="px-4 py-1.5 bg-white/5 -md text-xs font-medium text-white/80 hover:text-white transition-all capitalize rounded-tl-lg rounded-br-lg border-1"
+                            className="px-4 py-1.5 bg-white/5 text-xs font-medium text-white/80 hover:text-white transition-all capitalize rounded-tl-lg rounded-br-lg border border-white/10"
                         >
                             {cat}
                         </button>

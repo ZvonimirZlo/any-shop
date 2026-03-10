@@ -37,7 +37,7 @@ const ProductGrid = () => {
   return (
     <section className="relative z-30 bg-white py-12 px-6 mt-10">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* --- FILTER BUTTONS --- */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((cat) => (
@@ -45,8 +45,8 @@ const ProductGrid = () => {
               key={cat}
               onClick={() => setSelectedCategory(cat)}
               className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 capitalize
-                ${selectedCategory === cat 
-                  ? "bg-black text-white shadow-lg scale-105" 
+                ${selectedCategory === cat
+                  ? "bg-black text-white shadow-lg scale-105"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                 }`}
             >
@@ -56,7 +56,7 @@ const ProductGrid = () => {
         </div>
 
         {/* --- PRODUCT GRID --- */}
-        <motion.div 
+        <motion.div
           layout // Smoothly animate the grid layout when items disappear
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
@@ -70,9 +70,9 @@ const ProductGrid = () => {
                 transition={{ duration: 0.3 }}
                 key={product.id}
               >
-                <ProductCard 
-                  product={product} 
-                  onViewDetails={() => setDetailProduct(product)} 
+                <ProductCard
+                  product={product}
+                  onViewDetails={() => setDetailProduct(product)}
                 />
               </motion.div>
             ))}
@@ -84,7 +84,7 @@ const ProductGrid = () => {
       <AnimatePresence>
         {detailProduct && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -92,13 +92,13 @@ const ProductGrid = () => {
               className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             />
 
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl flex flex-col md:flex-row"
             >
-              <button 
+              <button
                 onClick={() => setDetailProduct(null)}
                 className="absolute top-4 right-4 z-20 w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors shadow-sm"
               >
@@ -106,10 +106,10 @@ const ProductGrid = () => {
               </button>
 
               <div className="w-full md:w-1/2 bg-[#f9f9f9] p-6 md:p-12 flex items-center justify-center">
-                <img 
-                  src={detailProduct.image} 
-                  alt={detailProduct.title} 
-                  className="h-auto max-h-[250px] md:max-h-[400px] object-contain mix-blend-multiply" 
+                <img
+                  src={detailProduct.image}
+                  alt={detailProduct.title}
+                  className="h-auto max-h-[250px] md:max-h-[400px] object-contain mix-blend-multiply"
                 />
               </div>
 
@@ -120,14 +120,14 @@ const ProductGrid = () => {
                 <h2 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-4">
                   {detailProduct.title}
                 </h2>
-                
+
                 <div className="flex items-center gap-2 mb-4">
-                   <span className="bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded">
-                     ★ {detailProduct.rating?.rate}
-                   </span>
-                   <span className="text-gray-400 text-sm">
-                     ({detailProduct.rating?.count} reviews)
-                   </span>
+                  <span className="bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded">
+                    ★ {detailProduct.rating?.rate}
+                  </span>
+                  <span className="text-gray-400 text-sm">
+                    ({detailProduct.rating?.count} reviews)
+                  </span>
                 </div>
 
                 <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-6">
@@ -138,15 +138,15 @@ const ProductGrid = () => {
                   <span className="text-2xl md:text-4xl font-light text-gray-900">
                     ${detailProduct.price}
                   </span>
-<button 
-  onClick={() => {
-    console.log("Adding product:", detailProduct); // Add this log to test!
-    addToCart(detailProduct);
-  }}
-  className="bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-600 transition-colors"
->
-  Add to Bag
-</button>
+                  <button
+                    onClick={() => {
+                      console.log("Adding product:", detailProduct);
+                      addToCart(detailProduct);
+                    }}
+                    className="bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-600 transition-colors"
+                  >
+                    Add to Bag
+                  </button>
                 </div>
               </div>
             </motion.div>
