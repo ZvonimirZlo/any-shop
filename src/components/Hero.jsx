@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm";
-import mobilePoster from "../media/girl1-Photoroom.png"; // Your mobile image
+import mobilePoster from "../media/girl1-Photoroom.webp";
 import { useNavigate } from "react-router-dom";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
