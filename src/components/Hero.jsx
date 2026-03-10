@@ -12,13 +12,27 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const [isDesktop, setIsDesktop] = useState(false);
 
     // Check screen size to prevent video loading on mobile
-    useEffect(() => {
-        const checkScreen = () => setIsDesktop(window.innerWidth >= 768);
-        checkScreen(); // Initial check
-        window.addEventListener('resize', checkScreen);
-        //clanup function
-        return () => window.removeEventListener('resize', checkScreen);
-    }, []);
+useEffect(() => {
+    let timeoutId = null;
+
+    const checkScreen = () => {
+        // Clear the previous timer
+        clearTimeout(timeoutId);
+
+        // Set a new timer to run the logic after 150ms of "silence"
+        timeoutId = setTimeout(() => {
+            setIsDesktop(window.innerWidth >= 768);
+        }, 150);
+    };
+
+    checkScreen(); // Run once on mount
+    window.addEventListener('resize', checkScreen);
+
+    return () => {
+        window.removeEventListener('resize', checkScreen);
+        clearTimeout(timeoutId); // Clean up the timer too!
+    };
+}, []);
 
     const handleShopAction = (category = "all") => {
         setSelectedCategory(category);
