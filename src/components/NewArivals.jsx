@@ -8,4 +8,4 @@ const NewArivals = () => {
   )
 }
 
-export default NewArivals
+export default NewArivals;
