@@ -8,7 +8,7 @@ const ProductGrid = () => {
   const [loading, setLoading] = useState(true);
   const [detailProduct, setDetailProduct] = useState(null);
   const { addToCart } = useCart();
-  // 1. Add state for the selected category
+  // Add state for the selected category
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   useEffect(() => {
@@ -25,8 +25,7 @@ const ProductGrid = () => {
 
   // 3. Filter logic
   const filteredProducts = selectedCategory === "all"
-    ? products
-    : products.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
+    ? products : products.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
 
   if (loading) return (
     <div className="h-64 flex items-center justify-center">
@@ -58,7 +57,7 @@ const ProductGrid = () => {
         {/* --- PRODUCT GRID --- */}
         <motion.div
           layout // Smoothly animate the grid layout when items disappear
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product) => (

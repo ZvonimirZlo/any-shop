@@ -74,7 +74,7 @@ useEffect(() => {
             )}
 
             {/* 2. Dark gradient overlay */}
-            <div className="fixed top-0 left-0 w-screen h-screen bg-gradient-to-b from-black/40 via-black/50 to-black/80 -z-10"></div>
+            <div className="fixed top-0 left-0 w-screen h-screen bg-linear-to-b from-black/40 via-black/50 to-black/80 -z-10"></div>
 
             {/* 3. Content container */}
             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4">

@@ -25,8 +25,6 @@ function App() {
                 <>
                   <Hero setSelectedCategory={setSelectedCategory} />
                   <ProductGrid selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
-                  <NewArrivals />
-                  <About />
                 </>
               } />
               <Route path="/arrivals" element={<NewArrivals />} />
