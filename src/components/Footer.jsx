@@ -8,20 +8,21 @@ const Footer = () => {
         
         {/* Brand Section */}
         <div className="flex flex-col items-start">
-          <Link to="/" className="text-2xl font-black mb-4 block">
+          <div className="text-2xl font-black mb-4 block">
             ANY <span className="italic font-light text-blue-400">SHOP</span>
-          </Link>
+          </div>
           <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
             Elevating your everyday essentials with curated collections for the modern lifestyle.
           </p>
         </div>
 
         {/* Quick Links - Centered on desktop for balance */}
-        <div className="md:text-center">
+<div className="md:text-center">
           <h4 className="font-bold mb-6 uppercase text-xs tracking-widest text-blue-400">Shop</h4>
           <ul className="space-y-4 text-gray-400 text-sm">
-            <li><Link to="/arrivals" className="hover:text-white transition-colors">New Arrivals</Link></li>
-            <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
+            <li><a href="/#products" className="hover:text-white transition-colors">Products</a></li>
+            <li><a href="/#about" className="hover:text-white transition-colors">About</a></li>
+            <li><a href="/#" className="hover:text-white transition-colors">Home</a></li>
           </ul>
         </div>
 
