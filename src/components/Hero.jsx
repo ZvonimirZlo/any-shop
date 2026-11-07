@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import bgImage from "../media/1409-147170113.webm";
 import mobilePoster from "../media/girl1-Photoroom.webp";
@@ -9,30 +8,6 @@ const categories = ['electronics', 'jewelery', "men's clothing", "women's clothi
 
 const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const navigate = useNavigate();
-    const [isDesktop, setIsDesktop] = useState(false);
-
-    // Check screen size to prevent video loading on mobile
-useEffect(() => {
-    let timeoutId = null;
-
-    const checkScreen = () => {
-        // Clear the previous timer
-        clearTimeout(timeoutId);
-
-        // Set a new timer to run the logic after 150ms of "silence"
-        timeoutId = setTimeout(() => {
-            setIsDesktop(window.innerWidth >= 768);
-        }, 150);
-    };
-
-    checkScreen(); // Run once on mount
-    window.addEventListener('resize', checkScreen);
-
-    return () => {
-        window.removeEventListener('resize', checkScreen);
-        clearTimeout(timeoutId); // Clean up the timer too!
-    };
-}, []);
 
     const handleShopAction = (category = "all") => {
         setSelectedCategory(category);
@@ -47,8 +22,8 @@ useEffect(() => {
 
     return (
         <div className="relative h-screen w-full overflow-hidden z-10">
-            {/* 1. Conditional Background Logic */}
-            {isDesktop ? (
+            {/* 1. Desktop Video Background (Hidden on Mobile) */}
+            <div className="hidden md:block">
                 <LazyLoadComponent threshold={300}>
                     <motion.video
                         initial={{ opacity: 0 }}
@@ -65,18 +40,18 @@ useEffect(() => {
                         <source src='src/media/1409-147170113.mp4' type="video/mp4" />
                     </motion.video>
                 </LazyLoadComponent>
-            ) : (
-                // Static Background Image for Mobile
-                <div 
-                    className="fixed top-0 left-0 w-screen h-screen bg-cover bg-center -z-10"
-                    style={{ backgroundImage: `url(${mobilePoster})` }}
-                />
-            )}
+            </div>
 
-            {/* 2. Dark gradient overlay */}
+            {/* 2. Mobile Static Background Image (Hidden on Desktop) */}
+            <div 
+                className="block md:hidden fixed top-0 left-0 w-screen h-screen bg-cover bg-center -z-10"
+                style={{ backgroundImage: `url(${mobilePoster})` }}
+            />
+
+            {/* 3. Dark gradient overlay */}
             <div className="fixed top-0 left-0 w-screen h-screen bg-linear-to-b from-black/40 via-black/50 to-black/80 -z-10"></div>
 
-            {/* 3. Content container */}
+            {/* 4. Content container */}
             <div className="relative z-10 flex h-full flex-col items-center justify-center text-center px-4">
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
