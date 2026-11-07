@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
+import SubpageNavbar from './components/SubpageNavbar'
 import Hero from './components/Hero'
 import ProductGrid from './components/ProductGrid'
 import About from './components/About'
@@ -15,22 +16,31 @@ import Footer from './components/Footer'
 import Privacy from './components/Privacy'
 import Terms from './components/Terms'
 
-// Smart ScrollToTop component that respects URL hashes
+// Scroll to top helper
 function ScrollToTop () {
-  const { pathname, hash } = useLocation()
-
+  const { pathname } = useLocation()
   useEffect(() => {
-    if (hash) {
-      const element = document.getElementById(hash.replace('#', ''))
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-      return
-    }
     window.scrollTo(0, 0)
-  }, [pathname, hash])
-
+  }, [pathname])
   return null
+}
+
+// Layout wrapper to conditionally render the correct navbar
+function Layout({ setSelectedCategory, children }) {
+  const location = useLocation();
+  const isSubpage = location.pathname === '/privacy' || location.pathname === '/terms';
+
+  return (
+    <>
+      {isSubpage ? <SubpageNavbar /> : <Navbar setSelectedCategory={setSelectedCategory} />}
+      <div className='flex flex-col min-h-screen bg-black pt-20'> {/* pt-20 ensures content doesn't hide behind fixed nav */}
+        <main className='flex-grow'>
+          {children}
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
 }
 
 function App () {
@@ -40,37 +50,32 @@ function App () {
     <CartProvider>
       <Router>
         <ScrollToTop />
-        <Navbar setSelectedCategory={setSelectedCategory} />
-        <div className='flex flex-col min-h-screen bg-white'>
-          <main className='flex-grow'>
-            <Routes>
-              <Route
-                path='/'
-                element={
-                  <>
-                    <Hero setSelectedCategory={setSelectedCategory} />
-                    <div id='products'>
-                      <ProductGrid
-                        selectedCategory={selectedCategory}
-                        setSelectedCategory={setSelectedCategory}
-                      />
-                    </div>
-                    <div id='arrivals'>
-                      <NewArrivals />
-                    </div>
-
-                    <div id='about'>
-                      <About />
-                    </div>
-                  </>
-                }
-              />
-              <Route path='/privacy' element={<Privacy />} />
-              <Route path='/terms' element={<Terms />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
+        <Layout setSelectedCategory={setSelectedCategory}>
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <>
+                  <Hero setSelectedCategory={setSelectedCategory} />
+                  <div id='products'>
+                    <ProductGrid
+                      selectedCategory={selectedCategory}
+                      setSelectedCategory={setSelectedCategory}
+                    />
+                  </div>
+                  <div id='arrivals'>
+                    <NewArrivals />
+                  </div>
+                  <div id='about'>
+                    <About />
+                  </div>
+                </>
+              }
+            />
+            <Route path='/privacy' element={<Privacy />} />
+            <Route path='/terms' element={<Terms />} />
+          </Routes>
+        </Layout>
       </Router>
     </CartProvider>
   )

@@ -97,7 +97,7 @@ const Navbar = ({ setSelectedCategory }) => {
             {/* Hamburger Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className='flex flex-col justify-center items-center w-8 h-8 space-y-1.5 z-[60] md:hidden'
+              className='flex flex-col justify-center items-center w-8 h-8 space-y-1.5 z-60 md:hidden'
             >
               <div
                 className={`w-6 h-0.5 bg-white transition-all duration-300 ${
@@ -125,7 +125,7 @@ const Navbar = ({ setSelectedCategory }) => {
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              className='fixed top-0 right-0 h-screen w-[75%] bg-black/95 backdrop-blur-xl z-[55] flex flex-col p-10 pt-24 space-y-8'
+              className='fixed top-0 right-0 h-screen w-[75%] bg-black/95 backdrop-blur-xl z-55 flex flex-col p-10 pt-24 space-y-8'
             >
               {/* Home Link */}
               <a
@@ -137,6 +137,14 @@ const Navbar = ({ setSelectedCategory }) => {
                 className='text-white text-3xl font-bold italic border-b border-white/10 pb-4'
               >
                 Home
+              </a>
+
+              <a
+                href='#products'
+                onClick={() => setIsOpen(false)}
+                className='text-white text-3xl font-bold italic border-b border-white/10 pb-4'
+              >
+                Products
               </a>
 
               {/* New Arrivals Link */}
