@@ -12,12 +12,15 @@ const Hero = ({ setSelectedCategory, scrollToProducts }) => {
     const handleShopAction = (category = "all") => {
         setSelectedCategory(category);
         navigate("/");
-        setTimeout(() => {
-            window.scrollTo({
-                top: window.innerHeight,
-                behavior: "smooth"
+setTimeout(() => {
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+            productsSection.scrollIntoView({ 
+                behavior: "smooth",
+                block: "start" 
             });
-        }, 100);
+        }
+    }, 100);
     };
 
     return (

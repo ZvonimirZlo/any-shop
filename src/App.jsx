@@ -57,7 +57,7 @@ function App () {
               element={
                 <>
                   <Hero setSelectedCategory={setSelectedCategory} />
-                  <div id='products'>
+                  <div id='products' className='scroll-mt-14'>
                     <ProductGrid
                       selectedCategory={selectedCategory}
                       setSelectedCategory={setSelectedCategory}

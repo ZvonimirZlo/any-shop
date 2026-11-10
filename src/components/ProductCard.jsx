@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useCart } from "../context/CartContext";
 
 const ProductCard = ({ product, onViewDetails }) => {
   return (
@@ -26,7 +25,7 @@ const ProductCard = ({ product, onViewDetails }) => {
         </div>
       </div>
 
-      {/* --- NEW: Name and Price Section --- */}
+      {/* --- Name and Price Section --- */}
       <div className="px-1 flex flex-col gap-1">
         <div className="flex justify-between items-start gap-4">
           <h3 className="text-gray-900 font-bold text-sm md:text-base leading-tight line-clamp-1 group-hover:text-blue-600 transition-colors">
