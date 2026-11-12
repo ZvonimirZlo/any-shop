@@ -45,7 +45,7 @@ const CartSidebar = () => {
                   {cartItems.map((item) => (
                     <div key={item.id} className="flex gap-4 border-b border-gray-100 pb-4">
                       {/* Product Image */}
-                      <div className="w-20 h-20 bg-gray-50 rounded-xl p-2 flex-shrink-0">
+                      <div className="w-20 h-20 bg-gray-50 rounded-xl p-2 shrink-0">
                         <img src={item.image} alt={item.title} className="w-full h-full object-contain" />
                       </div>
 

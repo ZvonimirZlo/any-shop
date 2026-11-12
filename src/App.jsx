@@ -34,7 +34,7 @@ function Layout({ setSelectedCategory, children }) {
     <>
       {isSubpage ? <SubpageNavbar /> : <Navbar setSelectedCategory={setSelectedCategory} />}
       <div className='flex flex-col min-h-screen bg-black pt-20'> {/* pt-20 ensures content doesn't hide behind fixed nav */}
-        <main className='flex-grow'>
+        <main className='grow'>
           {children}
         </main>
         <Footer />

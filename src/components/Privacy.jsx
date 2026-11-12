@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Privacy = () => {
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-6 font-sans">
@@ -27,7 +25,7 @@ const Privacy = () => {
           {/* Policy List */}
           <ol className="space-y-8">
             <li className="flex gap-4">
-              <span className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold">1</span>
+              <span className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold">1</span>
               <div>
                 <h3 className="font-bold text-gray-900 text-lg">Information We "Collect"</h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -39,7 +37,7 @@ const Privacy = () => {
             </li>
 
             <li className="flex gap-4">
-              <span className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold">2</span>
+              <span className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold">2</span>
               <div>
                 <h3 className="font-bold text-gray-900 text-lg">Third-Party Services</h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -50,7 +48,7 @@ const Privacy = () => {
             </li>
 
             <li className="flex gap-4">
-              <span className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold">3</span>
+              <span className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold">3</span>
               <div>
                 <h3 className="font-bold text-gray-900 text-lg">Local Storage</h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -61,7 +59,7 @@ const Privacy = () => {
             </li>
 
             <li className="flex gap-4">
-              <span className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold">4</span>
+              <span className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold">4</span>
               <div>
                 <h3 className="font-bold text-gray-900 text-lg">Contact</h3>
                 <p className="text-gray-600 leading-relaxed">

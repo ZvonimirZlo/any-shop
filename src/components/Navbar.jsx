@@ -36,6 +36,13 @@ const Navbar = ({ setSelectedCategory }) => {
           {/* Desktop Links (Using <a> tags to scroll smoothly to sections) */}
           <div className='hidden md:flex space-x-8'>
             <a
+              href='/#'
+              style={{ letterSpacing: '5px' }}
+              className='text-white hover:text-blue-400 text-sm font-medium'
+            >
+              HOME
+            </a>
+            <a
               href='#products'
               style={{ letterSpacing: '5px' }}
               className='text-white hover:text-blue-400 text-sm font-medium'
@@ -129,7 +136,7 @@ const Navbar = ({ setSelectedCategory }) => {
             >
               {/* Home Link */}
               <a
-                href='/'
+                href='/#'
                 onClick={() => {
                   if (setSelectedCategory) setSelectedCategory('all')
                   setIsOpen(false)
